@@ -54,7 +54,8 @@ export default function Home() {
       </Text>
       
       <View style={styles.form}>
-        <TextInputComponent />
+        <TextInputComponent text="Task"/>
+        <TextInputComponent text="Date"/>
         
         <AddButtonComponent />
       </View>
