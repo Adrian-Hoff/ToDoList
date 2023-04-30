@@ -4,8 +4,12 @@ import { TextInput} from "react-native";
 //styles
 import { styles } from "./styles";
 
-export default function TextInputCopmonent(){
+type props = {
+    text :string
+}
+
+export default function TextInputCopmonent({text}:props){
     return(
-        <TextInput style={styles.input} placeholder="Task Name" placeholderTextColor={'#6b6b6b'}/>
+        <TextInput style={styles.input} placeholder={text} placeholderTextColor={'#6b6b6b'}/>
     )
 }

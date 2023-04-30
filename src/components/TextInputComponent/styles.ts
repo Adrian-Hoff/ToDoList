@@ -2,8 +2,9 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     input:{
-        flex:1,
+        width:'100%',
         height:56,
+        marginTop:10,
         backgroundColor:'#1f1e25',
         borderRadius:5,
         color:'#FFF',
