@@ -1,5 +1,5 @@
 //react
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, View, Button} from "react-native";
 
 //styles
 import { styles } from "./styles";
@@ -11,8 +11,12 @@ export default function AddButtonComponent(){
     }
 
     return(
-        <TouchableOpacity style={styles.button} onPress={handleTaskAdd}>
-            <Text style={styles.buttonText}>+</Text>
-        </TouchableOpacity>        
+        <View>
+            <TouchableOpacity style={styles.button} onPress={handleTaskAdd}>
+            <Text style={styles.buttonText}>Add Task</Text>
+        </TouchableOpacity>  
+   
+        </View>
+             
     )
 }
