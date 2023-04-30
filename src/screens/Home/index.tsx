@@ -78,6 +78,9 @@ export default function Home() {
         },
       ]);
     }
+    setTaskDate("");
+    setTaskName("");
+
     /* 
     
     set([tasks, {}]) => [tasks[], {}] add an array into another
@@ -120,8 +123,16 @@ export default function Home() {
       </Text>
 
       <View style={styles.form}>
-        <TextInputComponent setTaskData={setTaskName} text="Task" />
-        <TextInputComponent setTaskData={setTaskDate} text="Date" />
+        <TextInputComponent
+          taskData={taskName}
+          setTaskData={setTaskName}
+          text="Task"
+        />
+        <TextInputComponent
+          taskData={taskDate}
+          setTaskData={setTaskDate}
+          text="Date"
+        />
         <View>
           <TouchableOpacity style={styles.button} onPress={handleTaskAdd}>
             <Text style={styles.buttonText}>Add Task</Text>
