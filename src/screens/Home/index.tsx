@@ -87,7 +87,9 @@ export default function Home() {
     set([...tasks, {}]) => [...{}, {}, {}, {}] add and element into an array
     */
   }
-  function handleTaskRemove(text: string) {
+  function handleTaskRemove(text: string, id: number) {
+    const tasksThatWontBeRemoved = tasks.filter((e) => e.id != id);
+
     Alert.alert(
       "Delete Task",
       `Are you sure you want to remove "${text}" from your task list?`,
@@ -100,13 +102,15 @@ export default function Home() {
         },
         {
           text: "OK",
-          onPress: () => Alert.alert(`"${text}" has been deleted`),
+          onPress: () => {
+            setTasks(tasksThatWontBeRemoved);
+            // Alert.alert(`"${text}" has been deleted`);
+          },
           style: "destructive",
         },
       ],
       { cancelable: false }
     );
-    console.log(text);
   }
 
   return (
@@ -184,7 +188,7 @@ export default function Home() {
             key={Math.random()}
             name={item.title}
             date={item.date}
-            onRemove={() => handleTaskRemove(item.title)}
+            onRemove={() => handleTaskRemove(item.title, item.id)}
           />
         )}
         ListEmptyComponent={() => (
