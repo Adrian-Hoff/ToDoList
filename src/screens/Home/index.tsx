@@ -8,8 +8,9 @@ import { StyleSheet, Text, View } from "react-native";
 import { styles } from "./styles";
 
 //components
-import TextInputCopmonent from "../../components/TextInputComponent";
+import TextInputComponent from "../../components/TextInputComponent";
 import AddButtonComponent from "../../components/AddButtonComponent";
+import TaskComponent from "../../components/TaskComponent";
 
 export default function Home() {
   const date = new Date();
@@ -41,7 +42,7 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <StatusBar />
-      <Text style={styles.taskName}>Task name</Text>
+      <Text style={styles.taskName}>Daily Tasks</Text>
       <Text style={styles.taskDate}>
         {day[date.getDay()] +
           ", " +
@@ -51,10 +52,17 @@ export default function Home() {
           ", " +
           date.getFullYear()}
       </Text>
+      
       <View style={styles.form}>
-        <TextInputCopmonent />
+        <TextInputComponent />
+        
         <AddButtonComponent />
       </View>
+      <Text style={styles.listTittle}>Today's Tasks</Text>
+      <TaskComponent />
+      <TaskComponent />
+      <TaskComponent />
+      <TaskComponent />
     </View>
   );
 }

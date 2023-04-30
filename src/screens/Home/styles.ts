@@ -10,18 +10,25 @@ export const styles = StyleSheet.create({
 
   taskName: {
     color: "#FFF",
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 32,
+   
     marginTop: 48,
   },
   taskDate: {
-    color: "#6b6b6b",
-    fontSize: 16,
+    color: "#a6a6a6",
+    fontSize: 18,
+    fontWeight: "100",
   },
   form: {
     width:'100%',
     flexDirection:'row',
-    marginTop:36,
+    marginTop:16,
     marginBottom:42
   },
+  listTittle:{
+    fontSize:32,
+    color:'#fff',
+    marginBottom:16,
+    fontWeight: "100",
+  }
 });
