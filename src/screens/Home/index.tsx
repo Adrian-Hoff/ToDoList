@@ -1,5 +1,5 @@
 // react
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FlatList,
   ScrollView,
@@ -24,8 +24,17 @@ export default function Home() {
     date: string;
   };
   const [tasks, setTasks] = useState([{} as taskProps] || null);
-  const date = new Date();
+  const [taskDate, setTaskDate] = useState("");
+  const [taskName, setTaskName] = useState("");
 
+  useEffect(() => {
+    console.log(`
+    name:${taskName}
+    date: ${taskDate}  
+    `);
+  }, [taskDate, taskName]);
+
+  const date = new Date();
   const day = [
     "Sunday",
     "Monday",
@@ -35,7 +44,6 @@ export default function Home() {
     "Friday",
     "Saturday",
   ];
-
   const month = [
     "January",
     "February",
@@ -51,65 +59,13 @@ export default function Home() {
     "December",
   ];
 
-  const a = [
-    {
-      id: 1,
-      title: "Lunch",
-      date: "2:00 PM",
-    },
-    {
-      id: 2,
-      title: "Finish school homework and study",
-      date: "3:00 PM",
-    },
-    {
-      id: 3,
-      title: "break",
-      date: "5:00 PM",
-    },
-    {
-      id: 4,
-      title: "code",
-      date: "5:10 PM",
-    },
-    {
-      id: 5,
-      title: "Do something",
-      date: "6:30 PM",
-    },
-    {
-      id: 6,
-      title: "Clean room",
-      date: "7:00 PM",
-    },
-    {
-      id: 7,
-      title: "Go to school",
-      date: "8:00 PM",
-    },
-    {
-      id: 8,
-      title: "Finish homework",
-      date: "9:00 PM",
-    },
-    {
-      id: 9,
-      title: "Finish study",
-      date: "10:00 PM",
-    },
-    {
-      id: 10,
-      title: "Finish",
-      date: "11:00 PM",
-    },
-  ];
   function handleTaskAdd() {
     if (tasks == null) {
       setTasks([
         {
           id: 1,
-          title: "a",
-          date: "2:00 PM",
+          title: taskName,
+          date: taskDate,
         },
       ]);
     } else {
@@ -117,8 +73,8 @@ export default function Home() {
         ...tasks,
         {
           id: tasks.length + 1,
-          title: "a",
-          date: "2:00 PM",
+          title: taskName,
+          date: taskDate,
         },
       ]);
     }
@@ -164,8 +120,8 @@ export default function Home() {
       </Text>
 
       <View style={styles.form}>
-        <TextInputComponent text="Task" />
-        <TextInputComponent text="Date" />
+        <TextInputComponent setTaskData={setTaskName} text="Task" />
+        <TextInputComponent setTaskData={setTaskDate} text="Date" />
         <View>
           <TouchableOpacity style={styles.button} onPress={handleTaskAdd}>
             <Text style={styles.buttonText}>Add Task</Text>
