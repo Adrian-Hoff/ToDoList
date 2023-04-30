@@ -1,5 +1,5 @@
 // react
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, ScrollView, Text, View, Alert } from "react-native";
 
 //style
 import { styles } from "./styles";
@@ -37,6 +37,24 @@ export default function Home() {
   ];
 
   function handleTaskRemove(text: string) {
+    Alert.alert(
+      "Delete Task",
+      `Are you sure you want to remove "${text}" from your task list?`,
+
+      [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => Alert.alert(`"${text}" has been deleted`),
+          style: "destructive",
+        },
+      ],
+      { cancelable: false }
+    );
     console.log(text);
   }
 
@@ -150,7 +168,7 @@ export default function Home() {
             key={item.id}
             name={item.title}
             date={item.date}
-            onRemove={() => handleTaskRemove(item.title)}
+            onRemove={() => handleTaskRemove(item.title.toString())}
           />
         )}
         ListEmptyComponent={() => (
