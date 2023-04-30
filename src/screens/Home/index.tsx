@@ -1,6 +1,3 @@
-//expo
-import { StatusBar } from "expo-status-bar";
-
 // react
 import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
@@ -98,7 +95,6 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <StatusBar />
       <Text style={styles.taskName}>Daily Tasks</Text>
       <Text style={styles.taskDate}>
         {day[date.getDay()] +
