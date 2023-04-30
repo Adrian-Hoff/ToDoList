@@ -39,6 +39,10 @@ export default function Home() {
     "December",
   ];
 
+  function handleTaskRemove(text: string) {
+    console.log(text);
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -52,18 +56,18 @@ export default function Home() {
           ", " +
           date.getFullYear()}
       </Text>
-      
+
       <View style={styles.form}>
-        <TextInputComponent text="Task"/>
-        <TextInputComponent text="Date"/>
-        
+        <TextInputComponent text="Task" />
+        <TextInputComponent text="Date" />
         <AddButtonComponent />
       </View>
       <Text style={styles.listTittle}>Today's Tasks</Text>
-      <TaskComponent />
-      <TaskComponent />
-      <TaskComponent />
-      <TaskComponent />
+      <TaskComponent
+        name="Clean my room"
+        date="2:00 PM"
+        onRemove={() => handleTaskRemove("Clean my room")}
+      ></TaskComponent>
     </View>
   );
 }
