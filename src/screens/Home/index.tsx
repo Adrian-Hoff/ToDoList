@@ -6,6 +6,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 //style
 import { styles } from './styles';
+import TextInputCopmonent from '../../components/TextInputComponent';
 
 export default function Home() {
   const date = new Date()

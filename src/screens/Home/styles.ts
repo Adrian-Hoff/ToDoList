@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
   
     taskName: {
-      color: '#FDFCFE',
+      color: '#FFF',
       fontSize: 24,
       fontWeight: 'bold',
       marginTop: 48
