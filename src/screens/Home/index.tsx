@@ -1,5 +1,13 @@
 // react
-import { FlatList, ScrollView, Text, View, Alert } from "react-native";
+import { useState } from "react";
+import {
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+  Text,
+  View,
+  Alert,
+} from "react-native";
 
 //style
 import { styles } from "./styles";
@@ -10,6 +18,12 @@ import AddButtonComponent from "../../components/AddButtonComponent";
 import TaskComponent from "../../components/TaskComponent";
 
 export default function Home() {
+  type taskProps = {
+    id: number;
+    title: string;
+    date: string;
+  };
+  const [tasks, setTasks] = useState([{} as taskProps] || null);
   const date = new Date();
 
   const day = [
@@ -21,6 +35,7 @@ export default function Home() {
     "Friday",
     "Saturday",
   ];
+
   const month = [
     "January",
     "February",
@@ -36,29 +51,7 @@ export default function Home() {
     "December",
   ];
 
-  function handleTaskRemove(text: string) {
-    Alert.alert(
-      "Delete Task",
-      `Are you sure you want to remove "${text}" from your task list?`,
-
-      [
-        {
-          text: "Cancel",
-          onPress: () => null,
-          style: "cancel",
-        },
-        {
-          text: "OK",
-          onPress: () => Alert.alert(`"${text}" has been deleted`),
-          style: "destructive",
-        },
-      ],
-      { cancelable: false }
-    );
-    console.log(text);
-  }
-
-  const tasks = [
+  const a = [
     {
       id: 1,
       title: "Lunch",
@@ -110,6 +103,52 @@ export default function Home() {
       date: "11:00 PM",
     },
   ];
+  function handleTaskAdd() {
+    if (tasks == null) {
+      setTasks([
+        {
+          id: 1,
+          title: "a",
+          date: "2:00 PM",
+        },
+      ]);
+    } else {
+      setTasks([
+        ...tasks,
+        {
+          id: tasks.length + 1,
+          title: "a",
+          date: "2:00 PM",
+        },
+      ]);
+    }
+    /* 
+    
+    set([tasks, {}]) => [tasks[], {}] add an array into another
+    set([...tasks, {}]) => [...{}, {}, {}, {}] add and element into an array
+    */
+  }
+  function handleTaskRemove(text: string) {
+    Alert.alert(
+      "Delete Task",
+      `Are you sure you want to remove "${text}" from your task list?`,
+
+      [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel",
+        },
+        {
+          text: "OK",
+          onPress: () => Alert.alert(`"${text}" has been deleted`),
+          style: "destructive",
+        },
+      ],
+      { cancelable: false }
+    );
+    console.log(text);
+  }
 
   return (
     <View style={styles.container}>
@@ -127,18 +166,21 @@ export default function Home() {
       <View style={styles.form}>
         <TextInputComponent text="Task" />
         <TextInputComponent text="Date" />
-        <AddButtonComponent />
+        <View>
+          <TouchableOpacity style={styles.button} onPress={handleTaskAdd}>
+            <Text style={styles.buttonText}>Add Task</Text>
+          </TouchableOpacity>
+        </View>
+        {/* <AddButtonComponent /> */}
       </View>
       <Text style={styles.listTittle}>Today's Tasks</Text>
-
-      {/* Scrollview loads all components,
+      <>
+        {/* Scrollview loads all components,
       even when they are not on the screen. 
       This can be noticed with "overflow: visible", 
       ScrollView => performance disadvantages
-      to enourmous lists
-      */}
-
-      {/* <ScrollView showsVerticalScrollIndicator={false}>
+      to enourmous lists*/}
+        {/* <ScrollView showsVerticalScrollIndicator={false}>
         {tasks.map((task) => {
           return (
             <TaskComponent
@@ -149,26 +191,33 @@ export default function Home() {
             />
           );
         })}
-      </ScrollView> */}
-
-      {/* 
-        FlatList Generates items as the user 
+      </ScrollView>  */}
+        {/* FlatList Generates items as the user 
         scrolls down the list. This can be 
         noticed with "overflow: visible". 
         Compared to the ScrollView, the 
         FlatList has performance advantages, 
-        especially for enormous lists
-      */}
+        especially for enormous lists */}
+      </>
+
+      <>
+        {tasks == null
+          ? null
+          : tasks.map((task) => {
+              task.id ? "undefined" : setTasks(null as any);
+            })}
+      </>
+
       <FlatList
         ListFooterComponent={<View style={{ height: 0 }} />}
         data={tasks}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id?.toString()}
         renderItem={({ item }) => (
           <TaskComponent
-            key={item.id}
+            key={Math.random()}
             name={item.title}
             date={item.date}
-            onRemove={() => handleTaskRemove(item.title.toString())}
+            onRemove={() => handleTaskRemove(item.title)}
           />
         )}
         ListEmptyComponent={() => (
